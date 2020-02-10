@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.ClusterRendering;
 using UnityEngine;
 
 public class ExitApp : MonoBehaviour
@@ -11,7 +12,10 @@ public class ExitApp : MonoBehaviour
 #if UNITY_EDITOR    
             UnityEditor.EditorApplication.ExitPlaymode();
 #else    
-            Application.Quit();
+            if (ClusterSynch.Active)
+                ClusterSynch.Instance.ShutdownAllClusterNodes();
+            else
+                Application.Quit();
 #endif
         }
     }
