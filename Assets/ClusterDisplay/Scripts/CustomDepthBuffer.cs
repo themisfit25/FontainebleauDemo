@@ -203,8 +203,7 @@ public class CustomDepthBuffer : MonoBehaviour
 
     void Update()
     {
-        // TMP DEBUG hack, show depth buffer on leftCtrl+G
-        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.G))
+        if (Input.GetKeyDown(KeyCode.G))
             m_ShowDebugUI = !m_ShowDebugUI;
         
         m_Sampler.Begin();
@@ -232,13 +231,6 @@ public class CustomDepthBuffer : MonoBehaviour
         }
         
         m_InstancingDataGenerationVisitor.PopulateRenderingData(m_RenderingData);
-        
-        // TMP DEBUG
-        /*Debug.Log("INSTANCING RENDERING DATA:");
-        foreach (var data in m_RenderingData)
-        {
-            Debug.Log($"Mesh name[{data.mesh.name}] id[{data.mesh.GetInstanceID()}] count[{data.transforms.Count}]");
-        }*/
     }
 
     static void UpdateRenderingDataRecursive(Transform parent, InstancingDataGenerationVisitor visitor) 
